@@ -32,4 +32,6 @@ public interface ProductoService {
 
     @DELETE("productos/{idProducto}")
     Call<Void> eliminar(@Path("idProducto") int idproducto);
+
+
 }
