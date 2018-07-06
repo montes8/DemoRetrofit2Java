@@ -1,7 +1,9 @@
-package com.example.montes8.demoretrofit2java;
+package com.example.montes8.demoretrofit2java.view;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+
+import com.example.montes8.demoretrofit2java.R;
 
 public class DetalleProductoActivity extends AppCompatActivity {
 
