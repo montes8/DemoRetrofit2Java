@@ -1,5 +1,6 @@
 package com.example.montes8.demoretrofit2java.adapter;
 
+import android.content.Context;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
@@ -37,14 +38,9 @@ public class ListaproductosAdapter extends RecyclerView.Adapter<ListaproductosAd
         Producto producto = listaProductos.get(position);
         holder.nombre.setText(producto.getNombre());
         holder.precio.setText(String.valueOf(producto.getPrecio()));
-        holder.itemView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
 
+        holder.setOnClickListener();
 
-
-            }
-        });
 
     }
 
@@ -55,13 +51,27 @@ public class ListaproductosAdapter extends RecyclerView.Adapter<ListaproductosAd
 
     public static class ProductoViewholder extends RecyclerView.ViewHolder{
 
+        Context context;
         public TextView nombre, precio;
 
         public ProductoViewholder(View itemView) {
             super(itemView);
+
+            context = itemView.getContext();
+
             nombre = itemView.findViewById(R.id.nomdre_producto);
             precio = itemView.findViewById(R.id.precio_producto);
+            }
 
+        public void setOnClickListener(){
+
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent intent = new Intent(context,DetalleProductoActivity.class);
+                    context.startActivity(intent);
+                }
+            });
         }
     }
 }
