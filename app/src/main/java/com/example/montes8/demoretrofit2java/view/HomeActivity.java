@@ -6,10 +6,13 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.example.montes8.demoretrofit2java.R;
@@ -25,7 +28,7 @@ import retrofit2.Retrofit;
 
 public class HomeActivity extends AppCompatActivity {
 
-    private ProgressDialog progressDialog;
+    private ProgressBar progressBar;
 
 
     private RecyclerView recyclerView;
@@ -35,21 +38,17 @@ public class HomeActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
+        progressBar = findViewById(R.id.pgCargando);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.homeToolbar);
+        setSupportActionBar(toolbar);
 
-        progressDialog= new ProgressDialog(this);
 
-        progressDialog.show();
-
-        recyclerView = findViewById(R.id.my_recyclerview);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        mAdapter = new ListaproductosAdapter();
 
        listarProductos();
 
 
 
-
-    }
+       }
 
     @Override
     protected void onResume() {
@@ -57,6 +56,11 @@ public class HomeActivity extends AppCompatActivity {
     }
 
     public void listarProductos(){
+
+        recyclerView = findViewById(R.id.my_recyclerview);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        mAdapter = new ListaproductosAdapter();
+
         Retrofit retrofit = RetrofitCreator.getInstance();
         ProductoService service=retrofit.create(ProductoService.class);
         Call<ArrayList<Producto>> listaProdcutoCallback = service.optenerProductosLista();
@@ -64,7 +68,8 @@ public class HomeActivity extends AppCompatActivity {
         listaProdcutoCallback.enqueue(new Callback<ArrayList<Producto>>() {
                                           @Override
                                           public void onResponse(Call<ArrayList<Producto>> call, Response<ArrayList<Producto>> response) {
-                                              progressDialog.dismiss();
+                                              recyclerView.setVisibility(View.VISIBLE);
+                                              progressBar.setVisibility(View.GONE);
 
                                               ArrayList<Producto> productoList =response.body();
                                               mAdapter.addList(productoList);
@@ -86,7 +91,6 @@ public class HomeActivity extends AppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.menu,menu);
         return super.onCreateOptionsMenu(menu);
