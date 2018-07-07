@@ -2,6 +2,7 @@ package com.example.montes8.demoretrofit2java.view;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -36,43 +37,53 @@ public class FormularioProductoActivity extends AppCompatActivity {
         guargarProducto = findViewById(R.id.button_guardar_producto);
 
 
- try {
-     String nombrep = nombre.getText().toString();
-     double preciop = Double.parseDouble(precio.getText().toString());
-     int lotep = Integer.parseInt(lote.getText().toString());
-     int stockp =Integer.parseInt(stock.getText().toString());
-     String desccripcionp = descripcion.getText().toString();
-
-      /*  Producto producto = new Producto(0,nombrep,preciop,lotep,stockp,desccripcionp);
-
-        Retrofit retrofit = RetrofitCreator.getInstance();
-        ProductoService service=retrofit.create(ProductoService.class);
-        Call<Void> guardarProductoCallback = service.registrar(producto);
-
-        guardarProductoCallback.enqueue(new Callback<Void>() {
+        guargarProducto.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onResponse(Call<Void> call, Response<Void> response) {
+            public void onClick(View view) {
 
-                Toast.makeText(FormularioProductoActivity.this,"Producto Guardado",Toast.LENGTH_SHORT).show();
+                try {
+                    String nombrep = nombre.getText().toString();
+                    double preciop = Double.parseDouble(precio.getText().toString());
+                    int lotep = Integer.parseInt(lote.getText().toString());
+                    int stockp =Integer.parseInt(stock.getText().toString());
+                    String desccripcionp = descripcion.getText().toString();
 
-                nombre.setText("");
-                precio.setText("");
-                lote.setText("");
-                stock.setText("");
-                descripcion.setText("");
+                    Producto producto = new Producto(0,nombrep,preciop,lotep,stockp,desccripcionp);
 
-            }
+                    Retrofit retrofit = RetrofitCreator.getInstance();
+                    ProductoService service=retrofit.create(ProductoService.class);
+                    Call<Void> guardarProductoCallback = service.registrar(producto);
 
-            @Override
-            public void onFailure(Call<Void> call, Throwable t) {
-                Toast.makeText(FormularioProductoActivity.this,"error al guardar",Toast.LENGTH_SHORT).show();
+                    guardarProductoCallback.enqueue(new Callback<Void>() {
+                        @Override
+                        public void onResponse(Call<Void> call, Response<Void> response) {
+
+                            Toast.makeText(FormularioProductoActivity.this,"Producto Guardado",Toast.LENGTH_SHORT).show();
+
+                            nombre.setText("");
+                            precio.setText("");
+                            lote.setText("");
+                            stock.setText("");
+                            descripcion.setText("");
+
+                        }
+
+                        @Override
+                        public void onFailure(Call<Void> call, Throwable t) {
+                            Toast.makeText(FormularioProductoActivity.this,"error al guardar",Toast.LENGTH_SHORT).show();
+
+                        }
+                    });
+
+                }catch (NumberFormatException e){
+                    e.printStackTrace();
+                }
 
             }
         });
-*/
- }catch (NumberFormatException e){
-     e.printStackTrace();
- }
+
+
+
 
 
 
