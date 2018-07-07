@@ -21,6 +21,8 @@ import com.example.montes8.demoretrofit2java.api.ProductoService;
 import com.example.montes8.demoretrofit2java.api.RetrofitCreator;
 import com.example.montes8.demoretrofit2java.model.Producto;
 import java.util.ArrayList;
+import java.util.Objects;
+
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -41,6 +43,7 @@ public class HomeActivity extends AppCompatActivity {
         progressBar = findViewById(R.id.pgCargando);
         Toolbar toolbar = (Toolbar) findViewById(R.id.homeToolbar);
         setSupportActionBar(toolbar);
+        getSupportActionBar().setTitle("Lista de Productos");
 
 
 
