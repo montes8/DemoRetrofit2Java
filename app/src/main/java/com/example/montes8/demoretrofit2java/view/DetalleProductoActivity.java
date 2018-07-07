@@ -40,6 +40,31 @@ public class DetalleProductoActivity extends AppCompatActivity {
         stockdetalle = findViewById(R.id.stock_detalle_producto);
         descripciondetalle = findViewById(R.id.detalle_producto_detalle);
         eliminar = findViewById(R.id.button_eliminar);
+        actulizar = findViewById(R.id.button_actualizar);
+
+        funcionesProducto();
+
+
+
+
+
+    }
+
+    public void ajustandoToolbarDetalle(){
+        Toolbar toolbardetalle = (Toolbar) findViewById(R.id.detalleToolbar);
+        setSupportActionBar(toolbardetalle);
+        getSupportActionBar().setTitle("Detalle de Producto");
+        toolbardetalle.setNavigationIcon(R.drawable.ic_atras);
+        toolbardetalle.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onBackPressed();
+            }
+        });
+
+    }
+
+    public void funcionesProducto(){
 
         Bundle extras = getIntent().getExtras();
         final Producto datosProducto = extras.getParcelable("detalleproducto");
@@ -103,23 +128,6 @@ public class DetalleProductoActivity extends AppCompatActivity {
                 startActivity(intentdetalle);
             }
         });
-
-
-
-
     }
 
-    public void ajustandoToolbarDetalle(){
-        Toolbar toolbardetalle = (Toolbar) findViewById(R.id.detalleToolbar);
-        setSupportActionBar(toolbardetalle);
-        getSupportActionBar().setTitle("Detalle de Producto");
-        toolbardetalle.setNavigationIcon(R.drawable.ic_atras);
-        toolbardetalle.setNavigationOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                onBackPressed();
-            }
-        });
-
-    }
 }
