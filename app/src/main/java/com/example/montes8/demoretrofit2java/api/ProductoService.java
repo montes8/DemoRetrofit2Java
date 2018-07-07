@@ -15,13 +15,13 @@ import retrofit2.http.Query;
 
 public interface ProductoService {
 
-    @GET("produtos/{idProducto}")
+    @GET("productos/{idProducto}")
     Call<Producto> optenerProductoSegunId(@Path("idProducto")int idProducto);
 
-    @GET("produtos")
+    @GET("productos")
     Call<ArrayList<Producto>> optenerProductosLista();
 
-    @GET("produtos")
+    @GET("productos")
     Call<ArrayList<Producto>> optenerProductos(@Query("buscar")String buscarParam);
 
     @POST("productos")
