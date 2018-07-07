@@ -35,7 +35,7 @@
             android:gravity="center"
             android:textStyle="bold"
             android:textColor="@color/colorPrimaryDark"
-            tools:text="6.6"/>
+            android:text="6.6"/>
 
 
     </LinearLayout>
@@ -139,7 +139,7 @@
                 android:id="@+id/precio_producto_detalle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                tools:text="97 Km S of Wonosari, Indonesia"
+                android:text="97 Km S of Wonosari, Indonesia"
                 android:paddingTop="@dimen/detail_activity_vertical_padding"
                 android:paddingBottom="@dimen/detail_activity_vertical_padding"/>
 
@@ -176,7 +176,7 @@
                 android:id="@+id/detalle_producto_detalle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                tools:text="17 de Noviembre - 16:29-37"
+                android:text="17 de Noviembre - 16:29-37"
                 android:paddingTop="@dimen/detail_activity_vertical_padding"
                 android:paddingBottom="@dimen/detail_activity_vertical_padding"/>
 

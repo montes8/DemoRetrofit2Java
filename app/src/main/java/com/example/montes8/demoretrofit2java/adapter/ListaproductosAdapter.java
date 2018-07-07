@@ -39,7 +39,7 @@ public class ListaproductosAdapter extends RecyclerView.Adapter<ListaproductosAd
         holder.nombre.setText(producto.getNombre());
         holder.precio.setText(String.valueOf(producto.getPrecio()));
 
-        holder.setOnClickListener();
+        holder.setOnClickListener(producto);
 
 
     }
@@ -63,12 +63,13 @@ public class ListaproductosAdapter extends RecyclerView.Adapter<ListaproductosAd
             precio = itemView.findViewById(R.id.precio_producto);
             }
 
-        public void setOnClickListener(){
+        public void setOnClickListener(final Producto productoss){
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     Intent intent = new Intent(context,DetalleProductoActivity.class);
+                    intent.putExtra("detalleproducto",productoss);
                     context.startActivity(intent);
                 }
             });
