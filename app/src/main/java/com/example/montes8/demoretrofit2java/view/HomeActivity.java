@@ -1,5 +1,6 @@
 package com.example.montes8.demoretrofit2java.view;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -24,6 +25,8 @@ import retrofit2.Retrofit;
 
 public class HomeActivity extends AppCompatActivity {
 
+    private ProgressDialog progressDialog;
+
 
     private RecyclerView recyclerView;
     private ListaproductosAdapter mAdapter;
@@ -32,6 +35,10 @@ public class HomeActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
+
+        progressDialog= new ProgressDialog(this);
+
+        progressDialog.show();
 
         recyclerView = findViewById(R.id.my_recyclerview);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -57,6 +64,8 @@ public class HomeActivity extends AppCompatActivity {
         listaProdcutoCallback.enqueue(new Callback<ArrayList<Producto>>() {
                                           @Override
                                           public void onResponse(Call<ArrayList<Producto>> call, Response<ArrayList<Producto>> response) {
+                                              progressDialog.dismiss();
+
                                               ArrayList<Producto> productoList =response.body();
                                               mAdapter.addList(productoList);
                                               recyclerView.setAdapter(mAdapter);
