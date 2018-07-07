@@ -2,6 +2,7 @@ package com.example.montes8.demoretrofit2java.view;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -36,6 +37,36 @@ public class FormularioProductoActivity extends AppCompatActivity {
         descripcion = findViewById(R.id.edit_text_descripcion);
         guargarProducto = findViewById(R.id.button_guardar_producto);
 
+
+        ajustarToolbarHome();
+        guardarProducto();
+
+
+
+
+
+
+
+
+
+    }
+
+    public void ajustarToolbarHome(){
+
+
+        Toolbar toolbars = (Toolbar) findViewById(R.id.formularioToolbar);
+        setSupportActionBar(toolbars);
+        getSupportActionBar().setTitle("Guardar de Productos");
+        toolbars.setNavigationIcon(R.drawable.ic_atras);
+        toolbars.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onBackPressed();
+            }
+        });
+    }
+
+    public void guardarProducto(){
 
         guargarProducto.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -81,17 +112,5 @@ public class FormularioProductoActivity extends AppCompatActivity {
 
             }
         });
-
-
-
-
-
-
-
-
-
-
-
-
     }
 }

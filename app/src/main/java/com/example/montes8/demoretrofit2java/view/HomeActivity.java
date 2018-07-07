@@ -31,8 +31,6 @@ import retrofit2.Retrofit;
 public class HomeActivity extends AppCompatActivity {
 
     private ProgressBar progressBar;
-
-
     private RecyclerView recyclerView;
     private ListaproductosAdapter mAdapter;
 
@@ -40,17 +38,21 @@ public class HomeActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
-        progressBar = findViewById(R.id.pgCargando);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.homeToolbar);
-        setSupportActionBar(toolbar);
-        getSupportActionBar().setTitle("Lista de Productos");
 
 
+      ajustarToolbarHome();
 
        listarProductos();
 
 
 
+       }
+       public void ajustarToolbarHome(){
+
+           progressBar = findViewById(R.id.pgCargando);
+           Toolbar toolbar = (Toolbar) findViewById(R.id.homeToolbar);
+           setSupportActionBar(toolbar);
+           getSupportActionBar().setTitle("Lista de Productos");
        }
 
     @Override
