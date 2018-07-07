@@ -2,14 +2,14 @@ package com.example.montes8.demoretrofit2java.model;
 
 public class Producto {
 
-    private int id;
-    private String nombre="";
-    private Double precio;
+    private int id ;
+    private String nombre;
+    private double precio;
     private int lote;
     private int stock;
     private String descripcion;
 
-    public Producto(int id, String nombre, Double precio, int lote, int stock, String descripcion) {
+    public Producto(int id, String nombre, double precio, int lote, int stock, String descripcion) {
         this.id = id;
         this.nombre = nombre;
         this.precio = precio;
@@ -34,11 +34,11 @@ public class Producto {
         this.nombre = nombre;
     }
 
-    public Double getPrecio() {
+    public double getPrecio() {
         return precio;
     }
 
-    public void setPrecio(Double precio) {
+    public void setPrecio(double precio) {
         this.precio = precio;
     }
 

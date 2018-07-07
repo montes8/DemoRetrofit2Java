@@ -36,7 +36,7 @@ public class ListaproductosAdapter extends RecyclerView.Adapter<ListaproductosAd
     public void onBindViewHolder(@NonNull ProductoViewholder holder, int position) {
         Producto producto = listaProductos.get(position);
         holder.nombre.setText(producto.getNombre());
-        holder.precio.setText(producto.getPrecio().toString());
+        holder.precio.setText(String.valueOf(producto.getPrecio()));
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

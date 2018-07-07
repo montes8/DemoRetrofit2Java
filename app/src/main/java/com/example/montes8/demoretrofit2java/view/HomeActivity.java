@@ -1,6 +1,6 @@
 package com.example.montes8.demoretrofit2java.view;
 
-import android.app.ProgressDialog;
+
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -21,7 +21,7 @@ import com.example.montes8.demoretrofit2java.api.ProductoService;
 import com.example.montes8.demoretrofit2java.api.RetrofitCreator;
 import com.example.montes8.demoretrofit2java.model.Producto;
 import java.util.ArrayList;
-import java.util.Objects;
+
 
 import retrofit2.Call;
 import retrofit2.Callback;
