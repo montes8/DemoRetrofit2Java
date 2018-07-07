@@ -1,11 +1,14 @@
 package com.example.montes8.demoretrofit2java.view;
 
+import android.content.DialogInterface;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.montes8.demoretrofit2java.R;
 import com.example.montes8.demoretrofit2java.model.Producto;
@@ -36,6 +39,25 @@ public class DetalleProductoActivity extends AppCompatActivity {
         lotedetalle.setText(String.valueOf(datosProducto.getLote()));
         stockdetalle.setText(String.valueOf(datosProducto.getStock()));
         descripciondetalle.setText(datosProducto.getDescripcion());
+
+
+
+        eliminar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                AlertDialog.Builder dialodBuilder = new AlertDialog.Builder(DetalleProductoActivity.this);
+                dialodBuilder.setTitle("Eliminar");
+                dialodBuilder.setPositiveButton("SI", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        Toast.makeText(DetalleProductoActivity.this,"daste clik aqui en si",Toast.LENGTH_SHORT).show();
+                    }
+                });
+                dialodBuilder.setNegativeButton("NO",null);
+
+            }
+        });
 
 
 
