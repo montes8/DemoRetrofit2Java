@@ -25,6 +25,14 @@ public class ListaproductosAdapter extends RecyclerView.Adapter<ListaproductosAd
        notifyDataSetChanged();
     }
 
+    public void removerLista(){
+            try {
+                listaProductos.clear();
+            }catch (NullPointerException e){
+                e.printStackTrace();
+            }
+    }
+
     @NonNull
     @Override
     public ProductoViewholder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {

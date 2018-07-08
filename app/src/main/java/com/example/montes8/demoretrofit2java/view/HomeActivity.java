@@ -79,11 +79,19 @@ public class HomeActivity extends AppCompatActivity implements SearchView.OnQuer
                                               recyclerView.setVisibility(View.VISIBLE);
                                               progressBar.setVisibility(View.GONE);
 
+                                              if(response.code()== 200){
                                               ArrayList<Producto> productoList =response.body();
                                               mAdapter.addList(productoList);
                                               recyclerView.setAdapter(mAdapter);
-                                              Log.d("lista productos","lista ="+productoList);
-                                              Toast.makeText(HomeActivity.this,"llegaste aqui",Toast.LENGTH_SHORT).show();
+                                              Toast.makeText(HomeActivity.this," Lista cargada",Toast.LENGTH_SHORT).show();
+
+                                              }else if(response.code() == 204 ){
+                                                  Toast.makeText(HomeActivity.this," n hay lista",Toast.LENGTH_SHORT).show();
+                                                  mAdapter.removerLista();
+                                              }else{
+                                                  Toast.makeText(HomeActivity.this," Ocurrio otro tipo de error",Toast.LENGTH_SHORT).show();
+
+                                              }
                                           }
 
                                           @Override
