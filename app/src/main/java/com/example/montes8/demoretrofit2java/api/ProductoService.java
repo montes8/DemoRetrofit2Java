@@ -28,7 +28,7 @@ public interface ProductoService {
     Call<Void>  registrar(@Body Producto producto);
 
     @PUT("productos/{idProducto}")
-    Call<Void> actulizar(@Path("idProdcuto") int idProducto,@Body Producto producto);
+    Call<Void> actulizar(@Path("idProducto") int idProducto,@Body Producto producto);
 
     @DELETE("productos/{idProducto}")
     Call<Void> eliminar(@Path("idProducto") int idproducto);

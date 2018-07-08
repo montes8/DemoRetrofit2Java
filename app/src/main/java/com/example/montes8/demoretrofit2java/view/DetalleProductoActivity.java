@@ -88,7 +88,6 @@ public class DetalleProductoActivity extends AppCompatActivity {
                 dialodBuilder.setPositiveButton("SI", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
-                        Toast.makeText(DetalleProductoActivity.this,"daste clik aqui en si",Toast.LENGTH_SHORT).show();
 
                         Call<Void> eliminarproductoCallback = service.eliminar(datosProducto.getId());
                         eliminarproductoCallback.enqueue(new Callback<Void>() {
