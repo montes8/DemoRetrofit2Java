@@ -94,10 +94,9 @@ public class DetalleProductoActivity extends AppCompatActivity {
                             @Override
                             public void onResponse(Call<Void> call, Response<Void> response) {
 
-                                Log.d("repsonseborrado","eliminar"+response.code());
-
                                 if(response.code()==200) {
                                     Toast.makeText(DetalleProductoActivity.this, "Prodcuto Eliminado", Toast.LENGTH_SHORT).show();
+
                                 }else{
                                     Toast.makeText(DetalleProductoActivity.this, "Ocurrio un Error al Eliminar", Toast.LENGTH_SHORT).show();
                                 }
@@ -110,7 +109,10 @@ public class DetalleProductoActivity extends AppCompatActivity {
 
                             }
                         });
+
+                        finish();
                     }
+
                 });
                 dialodBuilder.setNegativeButton("NO",null);
 

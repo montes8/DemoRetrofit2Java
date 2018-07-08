@@ -2,10 +2,12 @@ package com.example.montes8.demoretrofit2java.view;
 
 
 import android.content.Intent;
+import android.support.v4.view.MenuItemCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
@@ -28,7 +30,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 
-public class HomeActivity extends AppCompatActivity {
+public class HomeActivity extends AppCompatActivity implements SearchView.OnQueryTextListener{
 
     private ProgressBar progressBar;
     private RecyclerView recyclerView;
@@ -42,7 +44,7 @@ public class HomeActivity extends AppCompatActivity {
 
       ajustarToolbarHome();
 
-       listarProductos();
+
 
 
 
@@ -58,9 +60,10 @@ public class HomeActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
+        listarProductos("");
     }
 
-    public void listarProductos(){
+    public void listarProductos(String buscador  ){
 
         recyclerView = findViewById(R.id.my_recyclerview);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -68,7 +71,7 @@ public class HomeActivity extends AppCompatActivity {
 
         Retrofit retrofit = RetrofitCreator.getInstance();
         ProductoService service=retrofit.create(ProductoService.class);
-        Call<ArrayList<Producto>> listaProdcutoCallback = service.optenerProductosLista();
+        Call<ArrayList<Producto>> listaProdcutoCallback = service.optenerProductos(buscador);
 
         listaProdcutoCallback.enqueue(new Callback<ArrayList<Producto>>() {
                                           @Override
@@ -98,6 +101,11 @@ public class HomeActivity extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.menu,menu);
+        MenuItem item =  menu.findItem(R.id.item_buscador);
+        SearchView searchView =(SearchView)MenuItemCompat.getActionView(item);
+
+        searchView.setOnQueryTextListener(this);
+
         return super.onCreateOptionsMenu(menu);
     }
 
@@ -113,5 +121,15 @@ public class HomeActivity extends AppCompatActivity {
 
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public boolean onQueryTextSubmit(String query) {
+        return false;
+    }
+
+    @Override
+    public boolean onQueryTextChange(String newText) {
+        return false;
     }
 }
