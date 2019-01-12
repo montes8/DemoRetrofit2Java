@@ -64,7 +64,6 @@ public class HomeActivity extends AppCompatActivity implements SearchView.OnQuer
     }
 
     public void listarProductos(String buscador  ){
-
         recyclerView = findViewById(R.id.my_recyclerview);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         mAdapter = new ListaproductosAdapter();

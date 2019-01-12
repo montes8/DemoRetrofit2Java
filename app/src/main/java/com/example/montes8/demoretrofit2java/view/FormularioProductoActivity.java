@@ -42,14 +42,7 @@ public class FormularioProductoActivity extends AppCompatActivity {
         guardarProducto();
 
 
-
-
-
-
-
-
-
-    }
+        }
 
     public void ajustarToolbarHome(){
 
@@ -68,100 +61,94 @@ public class FormularioProductoActivity extends AppCompatActivity {
 
     public void guardarProducto(){
         Bundle extras = getIntent().getExtras();
+        assert extras != null;
         final Producto actualizaProducto = extras.getParcelable("actualizaProducto");
         Retrofit retrofit = RetrofitCreator.getInstance();
         final ProductoService service = retrofit.create(ProductoService.class);
 
+        try{
 
-        if (actualizaProducto == null) {
+            if (actualizaProducto == null) {
+                guargarProducto.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        try {
+                            String nombrep = nombre.getText().toString();
+                            double preciop = Double.parseDouble(precio.getText().toString());
+                            int lotep = Integer.parseInt(lote.getText().toString());
+                            int stockp = Integer.parseInt(stock.getText().toString());
+                            String desccripcionp = descripcion.getText().toString();
 
-            guargarProducto.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    try {
-                        String nombrep = nombre.getText().toString();
-                        double preciop = Double.parseDouble(precio.getText().toString());
-                        int lotep = Integer.parseInt(lote.getText().toString());
-                        int stockp = Integer.parseInt(stock.getText().toString());
-                        String desccripcionp = descripcion.getText().toString();
+                            Producto producto = new Producto(0, nombrep, preciop, lotep, stockp, desccripcionp);
 
-                        Producto producto = new Producto(0, nombrep, preciop, lotep, stockp, desccripcionp);
-
-                        Call<Void> guardarProductoCallback = service.registrar(producto);
-
-                        guardarProductoCallback.enqueue(new Callback<Void>() {
-                            @Override
-                            public void onResponse(Call<Void> call, Response<Void> response) {
-                                Toast.makeText(FormularioProductoActivity.this, "Producto Guardado", Toast.LENGTH_SHORT).show();
-                                nombre.setText("");
-                                precio.setText("");
-                                lote.setText("");
-                                stock.setText("");
-                                descripcion.setText("");
-                            }
-
-                            @Override
-                            public void onFailure(Call<Void> call, Throwable t) {
-                                Toast.makeText(FormularioProductoActivity.this, "error al guardar", Toast.LENGTH_SHORT).show();
-                            }
-                        });
-
-                    } catch (NumberFormatException e) {
-                        e.printStackTrace();
+                            Call<Void> guardarProductoCallback = service.registrar(producto);
+                            guardarProductoCallback.enqueue(new Callback<Void>() {
+                                @Override
+                                public void onResponse(Call<Void> call, Response<Void> response) {
+                                    Toast.makeText(FormularioProductoActivity.this, "Producto Guardado", Toast.LENGTH_SHORT).show();
+                                    nombre.setText("");
+                                    precio.setText("");
+                                    lote.setText("");
+                                    stock.setText("");
+                                    descripcion.setText("");
+                                }
+                                @Override
+                                public void onFailure(Call<Void> call, Throwable t) {
+                                    Toast.makeText(FormularioProductoActivity.this, "error al guardar", Toast.LENGTH_SHORT).show();
+                                }
+                            });
+                        } catch (NumberFormatException e) {
+                            e.printStackTrace();
+                        }
                     }
-                }
-            });
+                });
 
 
-        }else{
-            nombre.setText(actualizaProducto.getNombre());
-            precio.setText(String.valueOf(actualizaProducto.getPrecio()));
-            stock.setText(String.valueOf(actualizaProducto.getStock()));
-            lote.setText(String.valueOf(actualizaProducto.getLote()));
-            descripcion.setText(actualizaProducto.getDescripcion());
+            }else{
+                nombre.setText(actualizaProducto.getNombre());
+                precio.setText(String.valueOf(actualizaProducto.getPrecio()));
+                stock.setText(String.valueOf(actualizaProducto.getStock()));
+                lote.setText(String.valueOf(actualizaProducto.getLote()));
+                descripcion.setText(actualizaProducto.getDescripcion());
+                guargarProducto.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        try {
 
-            guargarProducto.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
+                            String nombrea = nombre.getText().toString();
+                            double precioa = Double.parseDouble(precio.getText().toString());
+                            int lotea = Integer.parseInt(lote.getText().toString());
+                            int stocka = Integer.parseInt(stock.getText().toString());
+                            String desccripciona = descripcion.getText().toString();
 
+                            int idProducto = actualizaProducto.getId();
+                            Producto productoActulizar = new Producto(0, nombrea, precioa, lotea, stocka, desccripciona);
+                            Call<Void> actualizar = service.actulizar(idProducto,productoActulizar);
 
-                    try {
+                            actualizar.enqueue(new Callback<Void>() {
+                                @Override
+                                public void onResponse(Call<Void> call, Response<Void> response) {
 
-                        String nombrea = nombre.getText().toString();
-                        double precioa = Double.parseDouble(precio.getText().toString());
-                        int lotea = Integer.parseInt(lote.getText().toString());
-                        int stocka = Integer.parseInt(stock.getText().toString());
-                        String desccripciona = descripcion.getText().toString();
+                                    Toast.makeText(FormularioProductoActivity.this, "Producto Actulizado", Toast.LENGTH_SHORT).show();
 
-                        int idProducto = actualizaProducto.getId();
-                        Producto productoActulizar = new Producto(0, nombrea, precioa, lotea, stocka, desccripciona);
-                        Call<Void> actualizar = service.actulizar(idProducto,productoActulizar);
+                                }
+                                @Override
+                                public void onFailure(Call<Void> call, Throwable t) {
 
-                        actualizar.enqueue(new Callback<Void>() {
-                            @Override
-                            public void onResponse(Call<Void> call, Response<Void> response) {
-
-                                Toast.makeText(FormularioProductoActivity.this, "Producto Actulizado", Toast.LENGTH_SHORT).show();
-
-                            }
-
-                            @Override
-                            public void onFailure(Call<Void> call, Throwable t) {
-
-                                Toast.makeText(FormularioProductoActivity.this, "Ocurrio un error", Toast.LENGTH_SHORT).show();
-                            }
-                        });
-
-
-
-
-                }catch (NumberFormatException e){
-                    e.printStackTrace();
+                                    Toast.makeText(FormularioProductoActivity.this, "Ocurrio un error", Toast.LENGTH_SHORT).show();
+                                }
+                            });
+                        }catch (NumberFormatException e){
+                            e.printStackTrace();
+                        }
                     }
-                }
-            });
+                });
 
+            }
+        }catch (Exception e){
+            e.printStackTrace();
         }
+
 
 
     }
