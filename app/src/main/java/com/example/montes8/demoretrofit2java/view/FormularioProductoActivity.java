@@ -60,13 +60,15 @@ public class FormularioProductoActivity extends AppCompatActivity {
     }
 
     public void guardarProducto(){
-        Bundle extras = getIntent().getExtras();
-        assert extras != null;
-        final Producto actualizaProducto = extras.getParcelable("actualizaProducto");
-        Retrofit retrofit = RetrofitCreator.getInstance();
-        final ProductoService service = retrofit.create(ProductoService.class);
 
         try{
+
+
+            Bundle extras = getIntent().getExtras();
+            final Producto actualizaProducto = extras.getParcelable("actualizaProducto");
+            Log.d("intenextra",""+actualizaProducto);
+            Retrofit retrofit = RetrofitCreator.getInstance();
+            final ProductoService service = retrofit.create(ProductoService.class);
 
             if (actualizaProducto == null) {
                 guargarProducto.setOnClickListener(new View.OnClickListener() {
@@ -145,10 +147,13 @@ public class FormularioProductoActivity extends AppCompatActivity {
                 });
 
             }
-        }catch (Exception e){
+
+
+
+
+        }catch (NullPointerException e){
             e.printStackTrace();
         }
-
 
 
     }
